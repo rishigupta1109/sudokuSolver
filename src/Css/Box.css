@@ -1,0 +1,27 @@
+.box input{
+    height:50px;
+    width:30px;
+    border:1px solid black;
+    caret-color: white;
+    font-size: larger;
+    padding-left:20px ;
+    cursor: pointer;
+}
+.y2,.y5{
+    border-right: 3px solid black;
+}
+.y8{
+    border-right: 3px solid black;
+}
+.y0{
+    border-left: 3px solid black;
+}
+.x2,.x5{
+    border-bottom: 3px solid black;
+}
+.x0{
+    border-top: 3px solid black;
+}
+.x8{
+    border-bottom: 3px solid black;
+}
