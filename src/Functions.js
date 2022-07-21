@@ -14,11 +14,11 @@ export const isValidSudoku = (code) => {
       }
     }
     for (let key in ur) {
-      if (key != "") console.log(key, ur[key]);
+      // if (key != "") console.log(key, ur[key]);
       if (ur[key] > 1 && key !== "") return false;
     }
     for (let key in uc) {
-      if (key != "") console.log(key, uc[key]);
+      // if (key != "") console.log(key, uc[key]);
       if (uc[key] > 1 && key !== "") return false;
     }
     ur = {};
@@ -38,7 +38,7 @@ export const isValidSudoku = (code) => {
         }
       }
       for (let key in ur) {
-        if (key != "") console.log(key, ur[key]);
+       
         if (ur[key] > 1 && key !== "") return false;
       }
     }
@@ -63,11 +63,11 @@ export const isValid=(code,x,y)=>{
         }
     }
       for (let key in ur) {
-        if (key != "") console.log(key, ur[key]);
+        
         if (ur[key] > 1 && key !== "") return false;
       }
       for (let key in uc) {
-        if (key != "") console.log(key, uc[key]);
+       
         if (uc[key] > 1 && key !== "") return false;
       }
       ur = {};
@@ -88,42 +88,58 @@ export const isValid=(code,x,y)=>{
         // console.log(code);
         // console.log(ur);
         for (let key in ur) {
-          if (key != "") console.log(key, ur[key]);
+          // if (key != "") console.log(key, ur[key]);
           if (ur[key] > 1 && key !== "") return false;
         }
       
     return true;
 }
-export const solver=(code ,i,j)=>{
+let count=0;
+export const solver=(code ,i,j,setValue,vis)=>{
          let r=false;
         if(code[i][j]!=''){
-            if(i==8&&j==8) {console.log(code);return true;}
+            if(i==8&&j==8) {
+             
+              return true;
+            }
             let x=i,y=j;
             y++;
             if(y>8){
                 y=0;
                 x++;
             }
-            return solver(code,x,y);
+            return solver(code,x,y,setValue,vis);
         }else{
             
             for(let k=1;k<=9;k++){
                 code[i][j]=String(k);
-
-               console.log(code,String(k),i,j)
+                if(vis){setTimeout(()=>{
+                  setValue(i,j,String(k));
+                
+                },count*500);
+                count++;}
+           
                 if(isValid(code,i,j)){
-                    if(i==8&&j==8) {console.log(code);return true;}
+                    if(i==8&&j==8) {
+                      
+                      return true;
+                    }
                    let x=i,y=j;
                     y++;
                     if(y>8){
                         y=0;
                         x++;
                     }
-                   r= solver(code,x,y);
+                   r= solver(code,x,y,setValue,vis);
                     if(r) return r;
                 }
             }
         }
         code[i][j]='';
+        if(vis){setTimeout(() => {
+          setValue(i, j, "");
+         
+        }, (count) * 500);
+        count++;}
         return r;
 }

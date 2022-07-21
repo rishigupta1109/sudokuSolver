@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Box from './../Components/Box';
+import _ from "lodash"
 import "../Css/SS.css"
 import { isValidSudoku, solver } from './../Functions';
 export default function SudokuSolver() { 
@@ -17,10 +18,10 @@ export default function SudokuSolver() {
 
     },[])
     const setValue=(x,y,value)=>{
+      
         let code=[...sudoku];
         code[x][y]=value;
         setSudoku(code);
-
     }
    const reset=()=>{
         let code=[];
@@ -35,11 +36,12 @@ export default function SudokuSolver() {
    }
    
     
-    const solve=()=>{
-        let code=[...sudoku];
+    const solve=(vis)=>{
+        let code=_.cloneDeep(sudoku);
         if(isValidSudoku(code)){
-            solver(code,0,0);
-            setSudoku(code)
+            solver(code,0,0,setValue,vis);
+            if(!vis) setSudoku(code);
+            
         }else{
             alert("Please write a valid sudoku")
         }
@@ -69,9 +71,13 @@ export default function SudokuSolver() {
         );
       })}
       <div className="btns">
-        <button className="primary" onClick={solve}>
+        <button className="primary" onClick={()=>{solve(false)}}>
           {" "}
           Solve!
+        </button>
+        <button className="primary" onClick={()=>{solve(true)}}>
+          {" "}
+          Visualise!
         </button>
         <button className="secondary" onClick={reset}>
           Reset
