@@ -11,8 +11,11 @@ export default function SudokuSolver() {
 
     },[])
     const setValue=(x,y,value,filler=false)=>{
-        if(filler){
+        if(filler&&value!=""){
           preFilled[x][y]=true;
+        }
+        if(filler&&value==""){
+          preFilled[x][y] = false;
         }
         let code=[...sudoku];
         code[x][y]=value;

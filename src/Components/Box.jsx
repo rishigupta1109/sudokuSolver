@@ -13,6 +13,7 @@ export default function Box(props) {
       <input
         style={{
           backgroundColor: props.preFilled ? "rgb(132, 237, 132)" : "white",
+          caretColor: props.preFilled ? "rgb(132, 237, 132)" : "white",
         }}
         type="text"
         onChange={changeHandler}
