@@ -36,3 +36,25 @@ button{
     flex-direction: row;
     justify-content: space-around;
 }
+
+@media (max-width:520px) {
+  button{
+    width:100px;
+    height:40px;
+    border-radius: 7px;
+    font-size: large;
+    cursor: pointer;
+}
+.head{
+    font-size: larger;
+}
+.box input {
+    height: 6vh;
+    width: 3vw;
+    padding-left: 6vw;
+    border: 1px solid black;
+    caret-color: white;
+    font-size: larger;
+    cursor: pointer;
+}
+}

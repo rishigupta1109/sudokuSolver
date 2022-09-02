@@ -9,6 +9,6 @@
   font-family: 'Courier New', Courier, monospace;
 }
 html,body,.App{
-
+  background-color: rgb(179, 252, 179);
   height : 93vh;
 }

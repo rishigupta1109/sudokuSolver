@@ -5,36 +5,39 @@ import "../Css/SS.css"
 import { isValidSudoku, solver } from './../Functions';
 export default function SudokuSolver() { 
     const [sudoku,setSudoku]=useState([]);
+    const [preFilled, setpreFilled] = useState([]);
     useEffect(()=>{
-        let code=[];
-        for(let i=0;i<9;i++){
-            let arr=[];
-            for(let j=0;j<9;j++){
-               arr.push("");
-            }
-            code.push(arr);
-        }
-       setSudoku(code); 
+       set();
 
     },[])
-    const setValue=(x,y,value)=>{
-      
+    const setValue=(x,y,value,filler=false)=>{
+        if(filler){
+          preFilled[x][y]=true;
+        }
         let code=[...sudoku];
         code[x][y]=value;
         setSudoku(code);
     }
-   const reset=()=>{
-        let code=[];
-        for (let i = 0; i < 9; i++) {
-          let arr = [];
-          for (let j = 0; j < 9; j++) {
-            arr.push("");
-          }
-          code.push(arr);
-        }
-        setSudoku(code);
+   const set=()=>{
+         let code = [];
+         let fillTemp = [];
+         for (let i = 0; i < 9; i++) {
+           let arr = [];
+           let arr2 = [];
+           for (let j = 0; j < 9; j++) {
+             arr.push("");
+             arr2.push(false);
+           }
+           code.push(arr);
+           fillTemp.push(arr2);
+         }
+         setSudoku(code);
+         setpreFilled(fillTemp);
+         
    }
-   
+   const reset=()=>{
+    window.location.reload();
+   }
     
     const solve=(vis)=>{
         let code=_.cloneDeep(sudoku);
@@ -48,7 +51,7 @@ export default function SudokuSolver() {
    }
   return (
     <div className="Container">
-      <h1 style={{ textAlign: "center", color: "black" }}>
+      <h1 className='head' style={{ textAlign: "center", color: "black" }}>
         Sudoku Solver !
       </h1>
       {sudoku.map((data, index) => {
@@ -64,6 +67,7 @@ export default function SudokuSolver() {
                   x={index}
                   y={idx}
                   set={setValue}
+                  preFilled={preFilled[index][idx]}
                 ></Box>
               );
             })}

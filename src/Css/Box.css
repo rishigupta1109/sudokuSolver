@@ -1,10 +1,10 @@
 .box input{
     height:50px;
     width:30px;
+    padding-left:20px ;
     border:1px solid black;
     caret-color: white;
     font-size: larger;
-    padding-left:20px ;
     cursor: pointer;
 }
 .y2,.y5{
